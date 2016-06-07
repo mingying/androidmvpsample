@@ -54,7 +54,7 @@ public class WeatherRemoteDataSource implements DataSource {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                loadDataCallback.loadDataFailure(responseString);
+                loadDataCallback.loadDataFailure("网络连接有问题");
                 Log.e("chl","responseString  = "+ responseString);
             }
         });

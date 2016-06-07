@@ -36,8 +36,9 @@ public class WeatherPresenter implements WeatherContract.Presenter {
             }
 
             @Override
-            public void loadDataFailure(String Error) {
+            public void loadDataFailure(String error) {
                 mWeatherView.hideProgressDialog();
+                mWeatherView.showError(error);
             }
         });
     }

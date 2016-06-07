@@ -20,6 +20,8 @@ public interface WeatherContract {
 
         void showWeatherUi(WeatherDataBean weatherDataBean);
 
+        void showError(String error);
+
     }
 
     interface Presenter extends BasePresenter{

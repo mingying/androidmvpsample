@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.mingying.androidmvpsample.R;
@@ -13,7 +14,7 @@ import com.mingying.androidmvpsample.data.bean.WeatherDataBean;
 /**
  * Created by caihanlin on 16/6/5.
  */
-public class WeatherActivity extends AppCompatActivity implements WeatherContract.View {
+public class WeatherActivity extends AppCompatActivity implements WeatherContract.View, View.OnClickListener{
 
 
     private TextView mCityName;
@@ -25,6 +26,8 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     private ProgressDialog mProgressDialog;
 
     private WeatherPresenter mPresenter;
+
+    private TextView mRefreshBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
         mCityName = (TextView) findViewById(R.id.city_name);
         mTemp = (TextView) findViewById(R.id.weather_temp);
         mWeatherDetail = (TextView) findViewById(R.id.weather_detail);
+        mRefreshBtn = (TextView) findViewById(R.id.refresh_btn);
+        mRefreshBtn.setOnClickListener(this);
     }
 
     @Override
@@ -68,7 +73,25 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     }
 
     @Override
+    public void showError(String error) {
+        mWeatherDetail.setText(error);
+    }
+
+    @Override
     public void setPresenter(WeatherContract.Presenter presenter) {
         //这里用不到
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.refresh_btn:
+                showProgressDialog();
+                mPresenter.loadWeatherData(true);
+                break;
+
+            default:
+                break;
+        }
     }
 }

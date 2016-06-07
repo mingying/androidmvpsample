@@ -11,7 +11,7 @@ public interface DataSource{
 
         void loadDataSuccess(WeatherDataBean mainModelBean);
 
-        void loadDataFailure(String Error);
+        void loadDataFailure(String error);
     }
 
     void getWeatherData(LoadDataCallback loadDataCallback);
